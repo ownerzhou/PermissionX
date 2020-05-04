@@ -14,11 +14,7 @@ class PermissionFragment : Fragment() {
         requestPermissions(permissions, 100)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 100) {
             val deniedList = ArrayList<String>()
             for ((index, result) in grantResults.withIndex()) {
