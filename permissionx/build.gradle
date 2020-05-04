@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -7,13 +7,13 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.owner.permissionx"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
@@ -33,7 +33,21 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
 
-    //implementation project(":permissionx")
-    implementation 'com.mobo.android.permissionx:permissionx:1.0.0'
+// 上传lib到maven私服
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        // 仓库路径
+        repository(url: NEXUS_REPOSITORY_URL) {
+            authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+        }
+        // 唯一标识
+        pom.groupId = "com.mobo.android.permissionx"
+        // 项目名称
+        pom.artifactId = "permissionx"
+        // 版本号
+        pom.version = "1.0.0"
+    }
 }

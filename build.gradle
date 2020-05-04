@@ -20,7 +20,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven() {
+            url NEXUS_REPOSITORY_URL
+            credentials {
+                username NEXUS_USERNAME
+                password NEXUS_PASSWORD
+            }
+        }
     }
 }
 
